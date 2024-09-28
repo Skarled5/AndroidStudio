@@ -1,46 +1,50 @@
-package com.hakanpolat.hakanpolatodevim
+package com.hakanpolat.yasamdongusu
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.util.Log
-import com.hakanpolat.hakanpolatodevim.databinding.ActivityMainBinding
+import com.hakanpolat.yasamdongusu.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) { // kullanıcı daha görmüyor
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        binding.
     }
 
-    fun sonucuGoster(view: View) {
-        try {
-            val kullaniciGirdisi = binding.editText.text.toString().toIntOrNull()
-            val kullaniciGirdisi1 = binding.editText2.text.toString().toIntOrNull()
+    override fun onStart() {
+        super.onStart()
+    }
 
-            var sonuc = 0.0
-            var sonuc1 = 0.0
+    override fun onResume() {
+        super.onResume()
+    }
 
-            if (kullaniciGirdisi != null) {
-                sonuc = kullaniciGirdisi * 0.4
-            } else {
-                Log.e("MainActivity", "Birinci kullanıcı girişi null")
-            }
+    override fun onPause() {
+        super.onPause()
+    }
 
-            if (kullaniciGirdisi1 != null) {
-                sonuc1 = kullaniciGirdisi1 * 0.6
-            } else {
-                Log.e("MainActivity", "İkinci kullanıcı girişi null")
-            }
+    override fun onStop() {
+        super.onStop()
+    }
 
-            val toplamSonuc = sonuc + sonuc1
-            binding.textView.text = "Sonuç: ${toplamSonuc}"
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 
-        } catch (e: Exception) {
-            Log.e("MainActivity", "Hata: ${e.message}", e)
-        }
+    fun sonrakiSayfa(view : View){
+        // context
+        val intent = Intent(this,SecondActivity::class.java)
+        startActivity(intent)
+        //var kullaniciGirdisi = binding.editText.text.toString()
+        //binding.textView.text = "İsim: ${kullaniciGirdisi}"
+        var kullaniciGirdisi = binding.editText.text.toString()
+        intent.putExtra("isim",kullaniciGirdisi)
+        startActivity(intent)
+
     }
 }
